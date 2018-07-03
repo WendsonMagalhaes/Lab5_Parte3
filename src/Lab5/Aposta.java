@@ -30,37 +30,6 @@ public class Aposta {
 		 */
 		protected int idAposta;
 		
-		/**
-		 * Método que retorna o nome do apostador.
-		 * 
-		 * @return String - apostador 
-		 */
-		public String getApostador() {
-
-			return this.apostador;
-		}
-		/**
-		 * Método que retorna o valor da aposta.
-		 * 
-		 * @return Int - valor
-		 */
-		public int getValor() {
-			return this.valor;
-		}
-		/**
-		 * Método que retorna a previsão da aposta.
-		 * 
-		 * @return String - previsao
-		 */
-		public String getPrevisao() {
-			return this.previsao;
-		}
-		/**
-		 * Método que retorna o número de identificação da aposta.
-		 */
-		public int getIdAposta(){
-			return this.idAposta;
-		}
 		
 	/**
 	 * Método que constrói o objeto ApostaComum, definindo o número de
@@ -135,6 +104,39 @@ public class Aposta {
 			return valores;
 		}
 
+	}
+	/**
+	 * Método que retorna o nome do apostador.
+	 * 
+	 * @return String - apostador 
+	 */
+	public String getApostador() {
+
+		return this.apostador;
+	}
+	/**
+	 * Método que retorna o valor da aposta.
+	 * 
+	 * @return Int - valor
+	 */
+	public int getValor() {
+		return this.valor;
+	}
+	/**
+	 * Método que retorna a previsão da aposta.
+	 * 
+	 * @return String - previsao
+	 */
+	public String getPrevisao() {
+		return this.previsao;
+	}
+	/**
+	 * Método que retorna o número de identificação da aposta.
+	 * 
+	 * @return int - idAposta
+	 */
+	public int getIdAposta(){
+		return this.idAposta;
 	}
 
 	/**

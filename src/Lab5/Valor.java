@@ -11,9 +11,11 @@ import java.math.RoundingMode;
  * @author Wendson Magalhães - 117210424
  */
 public class Valor implements Tipo {
-
+	/**
+	 * Valor assegurado
+	 */
 	private int valorSeguro;
-	private int custo;
+	
 
 
 	/**
@@ -22,23 +24,17 @@ public class Valor implements Tipo {
 	 * 
 	 * @param valorSeguro
 	 *            valor assegurado.
-	 * @param custo
-	 *            custo da aposta.
 	 */
 	
-	public Valor(int valorSeguro, int custo) {
+	public Valor(int valorSeguro) {
 		
-		ValidaDados
-		.validaZeroOuNegativo(
-				custo,
-				"Erro no cadastro de aposta assegurada por valor: Custo nao pode ser menor ou igual a zero");
 		ValidaDados
 		.validaZeroOuNegativo(
 				valorSeguro,
 				"Erro no cadastro de aposta assegurada por valor: Valor Assegurado nao pode ser menor ou igual a zero");
 		
 		this.valorSeguro = valorSeguro;
-		this.custo = custo;
+		
 	}
 	
 
@@ -55,16 +51,7 @@ public class Valor implements Tipo {
 	public double calculaValor(double valor) {
 		return this.valorSeguro;
 	}
-	/**
-	 * Método que retorna o custo da aposta assegurada
-	 * 
-	 * @return int - valor do custo.
-	 */
-	@Override
-	public int getCusto() {
-		
-		return this.custo;
-	}
+	
 
 	/**
 	 * Método que retorna a representação em String do Valor. A representação

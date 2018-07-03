@@ -50,10 +50,10 @@ public class CenarioBonus extends Cenario {
 	@Override
 	public int totalRateioCenario(double taxa) {
 
-		if (this.getEstado().equals("Nao finalizado")) {
-			throw new UnsupportedOperationException(
-					"Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
-		}
+		ValidaDados
+		.validaEstadoNaoFinalizado(this.getEstado(),
+				"Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
+
 		return (int) ((int) (this.calculaResultado()[0] + this.bonus - this
 				.calculaResultado()[0] * taxa));
 
@@ -76,7 +76,7 @@ public class CenarioBonus extends Cenario {
 				RoundingMode.HALF_EVEN);
 		String bonusString = String.valueOf(bonus).replace(".", ",");
 
-		return this.cenario + " - " + this.descricao.trim() + " - " + this.estado
+		return super.toString()
 				+ " - R$ " + bonusString;
 	}
 

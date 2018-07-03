@@ -23,7 +23,7 @@ public class ValorTest {
 	@Before
 	public void preparaValor() {
 
-		this.valor = new Valor(10000, 50);
+		this.valor = new Valor(10000);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class ValorTest {
 	 */
 	@Test
 	public void testValor() {
-		new Valor(10000, 50);
+		new Valor(10000);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ValorTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testValorValorSeguroZero() {
-		new Valor(0, 50);
+		new Valor(0);
 	}
 
 	/**
@@ -67,23 +67,10 @@ public class ValorTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testValorValorSeguroNegativo() {
-		new Valor(-10000, 50);
+		new Valor(-10000);
 	}
 
-	/**
-	 * Teste que verifica se gera uma exceção ao tentar criar um valor com custo zero.
-	 */
-	@Test(expected = NumberFormatException.class)
-	public void testValorCustoZero() {
-		new Valor(10000, 0);
-	}
-	/**
-	 * Teste que verifica se gera uma exceção ao tentar criar um valor com custo negativo.
-	 */
-	@Test(expected = NumberFormatException.class)
-	public void testValorcustoNegativo() {
-		new Valor(10000, -50);
-	}
+
 	/**
 	 * Teste que verifica o método toString de um Valor
 	 */
@@ -91,19 +78,6 @@ public class ValorTest {
 	public void testToString() {
 		assertEquals("ASSEGURADA (VALOR) - R$100,00", valor.toString());
 	}
-	/**
-	 * Teste que verifica o método getCusto() do tipo valor com os parâmetros iguais.
-	 */
-	@Test
-	public void testGetCusto() {
-		assertEquals(50, valor.getCusto());
-	}
-	/**
-	 * Teste que verifica o método getCusto() do tipo valor com os parâmetros diferentes.
-	 */
-	@Test
-	public void testGetCustoDiferentes() {
-		assertNotEquals(0, valor.getCusto());
-	}
+
 
 }

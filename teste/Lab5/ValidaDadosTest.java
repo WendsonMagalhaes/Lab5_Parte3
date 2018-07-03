@@ -303,14 +303,16 @@ public class ValidaDadosTest {
 	public void testValidaOrdemCadastro() {
 		ValidaDados.validaOrdem("cadastro", "");
 	}
+
 	/**
-	 * Teste que verifica o método validaOrdem(), passando a nome cadastro
-	 * como parâmetro.
+	 * Teste que verifica o método validaOrdem(), passando a nome cadastro como
+	 * parâmetro.
 	 */
 	@Test
 	public void testValidaOrdemNome() {
 		ValidaDados.validaOrdem("nome", "");
 	}
+
 	/**
 	 * Teste que verifica o método validaOrdem(), passando a apostas cadastro
 	 * como parâmetro.
@@ -345,5 +347,23 @@ public class ValidaDadosTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testValidaOrdemInvalido() {
 		ValidaDados.validaOrdem("Cadastro", "");
+	}
+
+	/**
+	 * Teste que verifica se gera uma exceção ao tentar usar o método
+	 * validaEstadoNaoFinalizado() passando um parâmetro inválido.
+	 */
+	@Test(expected = UnsupportedOperationException.class)
+	public void testValidaEstadoNaoFinalizado() {
+		ValidaDados.validaEstadoNaoFinalizado("Nao finalizado", "");
+	}
+
+	/**
+	 * Teste que verifica o método validaEstadoNaoFinalizado() passando um
+	 * parâmetro válido.
+	 */
+	@Test
+	public void testValidaEstadoNaoFinalizadoDiferente() {
+		ValidaDados.validaEstadoNaoFinalizado("Finalizado (ocoreu)", "");
 	}
 }

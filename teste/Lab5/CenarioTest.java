@@ -100,8 +100,8 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testCadastraAposta() {
-		Aposta aposta = new Aposta(1, "Francisco Cisco", 200, "N VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200, "N VAI ACONTECER");
 	}
 
 	/**
@@ -110,8 +110,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaNumeroDeIdentificacaoZero() {
-		Aposta aposta = new Aposta(0, "Francisco Cisco", 200, "N VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(0, "Francisco Cisco", 200, "N VAI ACONTECER");
 	}
 
 	/**
@@ -120,9 +120,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaNumeroDeIdentificacaoNegativo() {
-		Aposta aposta = new Aposta(-1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(-1, "Francisco Cisco", 200,
 				"N VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -131,8 +131,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaApostadorVazio() {
-		Aposta aposta = new Aposta(1, "", 200, "N VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(1, "", 200, "N VAI ACONTECER");
 	}
 
 	/**
@@ -141,8 +141,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaApostadorNulo() {
-		Aposta aposta = new Aposta(1, null, 200, "N VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(1, null, 200, "N VAI ACONTECER");
 	}
 
 	/**
@@ -151,8 +151,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaValorZero() {
-		Aposta aposta = new Aposta(1, "Francisco Cisco", 0, "N VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 0, "N VAI ACONTECER");
 	}
 
 	/**
@@ -161,9 +161,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaValorNegativo() {
-		Aposta aposta = new Aposta(1, "Francisco Cisco", -200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", -200,
 				"N VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -172,8 +172,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaPrevisaoVazia() {
-		Aposta aposta = new Aposta(1, "Francisco Cisco", 200, "");
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200, "");
 	}
 
 	/**
@@ -182,8 +182,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaPrevisaoNula() {
-		Aposta aposta = new Aposta(1, "Francisco Cisco", 200, null);
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200, null);
 	}
 
 	/**
@@ -192,9 +192,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaPrevisaoInvalida() {
-		Aposta aposta = new Aposta(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"NAO VAI ACONTECER");
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -203,9 +203,9 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testCadastraApostaSeguraValor() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -214,9 +214,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorNumeroDeIdentificacaoZero() {
-		ApostaSegura aposta = new ApostaSegura(0, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(0, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -225,9 +225,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorNumeroDeIdentificacaoNegativo() {
-		ApostaSegura aposta = new ApostaSegura(-1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(-1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -236,9 +236,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraValorApostadorVazio() {
-		ApostaSegura aposta = new ApostaSegura(1, "", 200, "N VAI ACONTECER",
+		
+		cenario.cadastraAposta(1, "", 200, "N VAI ACONTECER",
 				100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -247,9 +247,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraValorApostadorNulo() {
-		ApostaSegura aposta = new ApostaSegura(1, null, 200, "N VAI ACONTECER",
+		
+		cenario.cadastraAposta(1, null, 200, "N VAI ACONTECER",
 				100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -258,9 +258,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorValorZero() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 0,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 0,
 				"N VAI ACONTECER", 100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -269,9 +269,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorValorNegativo() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", -200,
-				"N VAI ACONTECER", 100, 10);
-		cenario.cadastraAposta(aposta);
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", -200,
+		"N VAI ACONTECER", 100, 1);
 	}
 
 	/**
@@ -280,9 +280,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraValorPrevisaoVazia() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200, "",
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200, "",
 				100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -291,9 +291,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraValorPrevisaoNula() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200, null,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200, null,
 				100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -302,9 +302,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraValorPrevisaoInvalida() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"NAO VAI ACONTECER", 100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -313,9 +313,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorValorSeguradoZero() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 0, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -324,9 +324,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorValorSeguradoNegativo() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", -100, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -335,9 +335,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorCustoZero() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 100, 0);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -346,9 +346,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraValorCustoNegativo() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+	
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 100, -10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -357,9 +357,9 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testCadastraApostaSeguraTaxa() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -368,9 +368,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaNumeroDeIdentificacaoZero() {
-		ApostaSegura aposta = new ApostaSegura(0, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(0, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -379,9 +379,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaNumeroDeIdentificacaoNegativo() {
-		ApostaSegura aposta = new ApostaSegura(-1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(-1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -390,9 +390,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraTaxaApostadorVazio() {
-		ApostaSegura aposta = new ApostaSegura(1, "", 200, "N VAI ACONTECER",
+		
+		cenario.cadastraAposta(1, "", 200, "N VAI ACONTECER",
 				0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -401,9 +401,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraTaxaApostadorNulo() {
-		ApostaSegura aposta = new ApostaSegura(1, null, 200, "N VAI ACONTECER",
+		
+		cenario.cadastraAposta(1, null, 200, "N VAI ACONTECER",
 				0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -412,9 +412,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaValorZero() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 0,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 0,
 				"N VAI ACONTECER", 0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -423,9 +423,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaValorNegativo() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", -200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", -200,
 				"N VAI ACONTECER", 0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -434,9 +434,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraTaxaPrevisaoVazia() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200, "",
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200, "",
 				0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -445,9 +445,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraTaxaPrevisaoNula() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200, null,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200, null,
 				0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -456,9 +456,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastraApostaSeguraTaxaPrevisaoInvalida() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"NAO VAI ACONTECER", 0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -467,9 +467,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaTaxaZero() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 0, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -478,9 +478,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaTaxaNegativa() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+	
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", -0.05, 10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -489,9 +489,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaCustoZero() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 0.05, 0);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -500,9 +500,9 @@ public class CenarioTest {
 	 */
 	@Test(expected = NumberFormatException.class)
 	public void testCadastraApostaSeguraTaxaCustoNegativo() {
-		ApostaSegura aposta = new ApostaSegura(1, "Francisco Cisco", 200,
+		
+		cenario.cadastraAposta(1, "Francisco Cisco", 200,
 				"N VAI ACONTECER", 0.05, -10);
-		cenario.cadastraAposta(aposta);
 	}
 
 	/**
@@ -511,12 +511,12 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testExibeApostas() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Francisco Cisco", 20000,
-				"N VAI ACONTECER", 1000, 50));
-		cenario.cadastraAposta(new Aposta(2, "Anonimo", 199, "N VAI ACONTECER"));
-		cenario.cadastraAposta(new ApostaSegura(3, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
-		cenario.cadastraAposta(new Aposta(4, "Livia", 30000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Francisco Cisco", 20000,
+				"N VAI ACONTECER", 1000, 50);
+		cenario.cadastraAposta(2, "Anonimo", 199, "N VAI ACONTECER");
+		cenario.cadastraAposta(3, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
+		cenario.cadastraAposta(4, "Livia", 30000, "VAI ACONTECER");
 
 		assertEquals(
 				"Francisco Cisco - R$200,00 - N VAI ACONTECER - ASSEGURADA (VALOR) - R$10,00"
@@ -568,12 +568,12 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testCalculaResultado() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Francisco Cisco", 20000,
-				"N VAI ACONTECER", 1000, 50));
-		cenario.cadastraAposta(new Aposta(2, "Anonimo", 199, "N VAI ACONTECER"));
-		cenario.cadastraAposta(new ApostaSegura(3, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
-		cenario.cadastraAposta(new Aposta(4, "Livia", 30000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Francisco Cisco", 20000,
+				"N VAI ACONTECER", 1000, 50);
+		cenario.cadastraAposta(2, "Anonimo", 199, "N VAI ACONTECER");
+		cenario.cadastraAposta(3, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
+		cenario.cadastraAposta(4, "Livia", 30000, "VAI ACONTECER");
 		cenario.encerraCenario(true);
 		assertEquals(20199, cenario.calculaResultado()[0], 0.00001);
 		assertEquals(1000, cenario.calculaResultado()[1], 0.00001);
@@ -597,12 +597,12 @@ public class CenarioTest {
 	@Test
 	public void testTotalRateioCenario() {
 
-		cenario.cadastraAposta(new ApostaSegura(1, "Francisco Cisco", 20000,
-				"N VAI ACONTECER", 1000, 50));
-		cenario.cadastraAposta(new Aposta(2, "Anonimo", 199, "N VAI ACONTECER"));
-		cenario.cadastraAposta(new ApostaSegura(3, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
-		cenario.cadastraAposta(new Aposta(4, "Livia", 30000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Francisco Cisco", 20000,
+				"N VAI ACONTECER", 1000, 50);
+		cenario.cadastraAposta(2, "Anonimo", 199, "N VAI ACONTECER");
+		cenario.cadastraAposta(3, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
+		cenario.cadastraAposta(4, "Livia", 30000, "VAI ACONTECER");
 		cenario.encerraCenario(true);
 		assertEquals(19998, cenario.totalRateioCenario(0.01));
 
@@ -626,8 +626,8 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testAlteraApostaSeguroValor() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
+		cenario.cadastraAposta(1, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
 		cenario.alteraApostaSeguroValor(1, 1000);
 		assertEquals(
 				"Matheus - R$100,00 - VAI ACONTECER - ASSEGURADA (VALOR) - R$10,00"
@@ -641,8 +641,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAlteraApostaSeguroValorApostaNaoCadastrada() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
+		cenario.cadastraAposta(1, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
 		cenario.alteraApostaSeguroValor(2, 1000);
 
 	}
@@ -653,7 +653,7 @@ public class CenarioTest {
 	 */
 	@Test(expected = ClassCastException.class)
 	public void testAlteraApostaSeguroValorApostaComum() {
-		cenario.cadastraAposta(new Aposta(1, "Matheus", 10000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Matheus", 10000, "VAI ACONTECER");
 		cenario.alteraApostaSeguroValor(1, 1000);
 
 	}
@@ -664,8 +664,8 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testAlteraApostaSeguraTaxa() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Matheus", 10000,
-				"VAI ACONTECER", 1000, 40));
+		cenario.cadastraAposta(1, "Matheus", 10000,
+				"VAI ACONTECER", 1000, 40);
 		cenario.alteraApostaSeguraTaxa(1, 0.01);
 		assertEquals(
 				"Matheus - R$100,00 - VAI ACONTECER - ASSEGURADA (TAXA) - 1%"
@@ -679,8 +679,8 @@ public class CenarioTest {
 	 */
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testAlteraApostaSeguraTaxaApostaNaoCadastrada() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Matheus", 10000,
-				"VAI ACONTECER", 1000, 40));
+		cenario.cadastraAposta(1, "Matheus", 10000,
+				"VAI ACONTECER", 1000, 40);
 		cenario.alteraApostaSeguraTaxa(2, 0.01);
 
 	}
@@ -691,7 +691,7 @@ public class CenarioTest {
 	 */
 	@Test(expected = ClassCastException.class)
 	public void testAlteraApostaSeguraTaxaApostaComum() {
-		cenario.cadastraAposta(new Aposta(1, "Matheus", 10000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Matheus", 10000, "VAI ACONTECER");
 		cenario.alteraApostaSeguraTaxa(1, 0.01);
 
 	}
@@ -709,12 +709,12 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testGetQtdApostasApostasCadastradas() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Francisco Cisco", 20000,
-				"N VAI ACONTECER", 1000, 50));
-		cenario.cadastraAposta(new Aposta(2, "Anonimo", 199, "N VAI ACONTECER"));
-		cenario.cadastraAposta(new ApostaSegura(3, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
-		cenario.cadastraAposta(new Aposta(4, "Livia", 30000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Francisco Cisco", 20000,
+				"N VAI ACONTECER", 1000, 50);
+		cenario.cadastraAposta(2, "Anonimo", 199, "N VAI ACONTECER");
+		cenario.cadastraAposta(3, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
+		cenario.cadastraAposta(4, "Livia", 30000, "VAI ACONTECER");
 		assertEquals(4, cenario.getQtdApostas());
 	}
 
@@ -739,12 +739,12 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testGetValorApostasApostasCadastradas() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Francisco Cisco", 20000,
-				"N VAI ACONTECER", 1000, 50));
-		cenario.cadastraAposta(new Aposta(2, "Anonimo", 199, "N VAI ACONTECER"));
-		cenario.cadastraAposta(new ApostaSegura(3, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
-		cenario.cadastraAposta(new Aposta(4, "Livia", 30000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Francisco Cisco", 20000,
+				"N VAI ACONTECER", 1000, 50);
+		cenario.cadastraAposta(2, "Anonimo", 199, "N VAI ACONTECER");
+		cenario.cadastraAposta(3, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
+		cenario.cadastraAposta(4, "Livia", 30000, "VAI ACONTECER");
 
 		assertEquals(60199, cenario.getValorApostas(), 0.00001);
 	}
@@ -802,12 +802,12 @@ public class CenarioTest {
 	 */
 	@Test
 	public void testGetQtdGanhadoresCenarioApostasCadastradas() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Francisco Cisco", 20000,
-				"N VAI ACONTECER", 1000, 50));
-		cenario.cadastraAposta(new Aposta(2, "Anonimo", 199, "N VAI ACONTECER"));
-		cenario.cadastraAposta(new ApostaSegura(3, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
-		cenario.cadastraAposta(new Aposta(4, "Livia", 30000, "VAI ACONTECER"));
+		cenario.cadastraAposta(1, "Francisco Cisco", 20000,
+				"N VAI ACONTECER", 1000, 50);
+		cenario.cadastraAposta(2, "Anonimo", 199, "N VAI ACONTECER");
+		cenario.cadastraAposta(3, "Matheus", 10000,
+				"VAI ACONTECER", 0.01, 40);
+		cenario.cadastraAposta(4, "Livia", 30000, "VAI ACONTECER");
 
 		cenario.encerraCenario(true);
 		assertEquals(2, cenario.getQtdGanhadores());
@@ -821,35 +821,7 @@ public class CenarioTest {
 		assertNotEquals(1, cenario.getQtdGanhadores());
 	}
 
-	/**
-	 * Teste que verifica o método getTamanho() cenário vazio.
-	 */
-	@Test
-	public void testGetTamanhoCenarioVazio() {
-		assertEquals(0, cenario.getTamanho());
-	}
-
-	/**
-	 * Teste que verifica o método getTamanho() cenário com apostas cadastradas.
-	 */
-	@Test
-	public void testGetTamanhoApostasCadastradas() {
-		cenario.cadastraAposta(new ApostaSegura(1, "Francisco Cisco", 20000,
-				"N VAI ACONTECER", 1000, 50));
-		cenario.cadastraAposta(new Aposta(2, "Anonimo", 199, "N VAI ACONTECER"));
-		cenario.cadastraAposta(new ApostaSegura(3, "Matheus", 10000,
-				"VAI ACONTECER", 0.01, 40));
-		cenario.cadastraAposta(new Aposta(4, "Livia", 30000, "VAI ACONTECER"));
-		assertEquals(4, cenario.getTamanho());
-	}
-
-	/**
-	 * Teste que verifica o método getTamanho() parâmetros inválidos.
-	 */
-	@Test
-	public void testGetTamanhoDiferentes() {
-		assertNotEquals(1, cenario.getTamanho());
-	}
+	
 
 	/**
 	 * Teste que verifica o método toString()

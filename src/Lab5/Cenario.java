@@ -32,10 +32,7 @@ public class Cenario {
 	 * Lista de todas as apostas feitas no cenário.
 	 */
 	protected List<Aposta> apostasFeitas;
-	/**
-	 * Quantidade de apostas feitas no cenário.
-	 */
-	protected int qtdApostas;
+
 	/**
 	 * Valor Total das apostas feitas no cenário.
 	 */
@@ -66,7 +63,6 @@ public class Cenario {
 		this.estado = "Nao finalizado";
 		this.cenario = cenario;
 		this.apostasFeitas = new ArrayList<>();
-		this.qtdApostas = 0;
 		this.valorApostas = 0;
 		this.qtdGanhadores = 0;
 	}
@@ -74,14 +70,75 @@ public class Cenario {
 	/**
 	 * Método que cadastra uma aposta no cenário.
 	 * 
-	 * @param aposta
-	 *            aposta a ser adicionada ao cenário.
+	 * @param idAposta
+	 *            número de identificação da aposta.
+	 * @param apostador
+	 *            nome do apostador.
+	 * @param valor
+	 *            valor da aposta.
+	 * @param previsao
+	 *            previsão da aposta.
 	 */
-	public void cadastraAposta(Aposta aposta) {
+	public void cadastraAposta(int idAposta, String apostador, int valor,
+			String previsao) {
 
+		Aposta aposta = new Aposta(idAposta, apostador, valor, previsao);
 		apostasFeitas.add(aposta);
 
-		this.qtdApostas++;
+		this.valorApostas += aposta.getValor();
+
+	}
+
+	/**
+	 * Método que cadastra uma aposta assegurada do tipo valor.
+	 * 
+	 * @param idAposta
+	 *            número de identificação da aposta.
+	 * @param apostador
+	 *            nome do apostador.
+	 * @param valor
+	 *            valor da aposta.
+	 * @param previsao
+	 *            previsao da aposta.
+	 * @param valorSeguro
+	 *            valor a ser assegurado.
+	 * @param custo
+	 *            custo da aposta.
+	 */
+	public void cadastraAposta(int idAposta, String apostador, int valor,
+			String previsao, int valorSeguro, int custo) {
+
+		ApostaSegura aposta = new ApostaSegura(idAposta, apostador, valor,
+				previsao, valorSeguro, custo);
+		apostasFeitas.add(aposta);
+
+		this.valorApostas += aposta.getValor();
+
+	}
+
+	/**
+	 * Método que cadastra uma aposta assegurada do tipo taxa.
+	 * 
+	 * @param idAposta
+	 *            número de identificação da aposta.
+	 * @param apostador
+	 *            nome do apostador.
+	 * @param valor
+	 *            valor da aposta.
+	 * @param previsao
+	 *            previsão da aposta.
+	 * @param taxa
+	 *            percentual a ser assegurado.
+	 * @param custo
+	 *            custo da aposta.
+	 */
+	public void cadastraAposta(int idAposta, String apostador, int valor,
+			String previsao, double taxa, int custo) {
+
+		ApostaSegura aposta = new ApostaSegura(idAposta, apostador, valor,
+				previsao, taxa, custo);
+		apostasFeitas.add(aposta);
+
 		this.valorApostas += aposta.getValor();
 
 	}
@@ -100,11 +157,11 @@ public class Cenario {
 	 *         cenário.
 	 */
 	public String exibeApostas() {
-	
+
 		String todasAsApostas = "";
 		for (Aposta aposta : apostasFeitas) {
 			todasAsApostas += aposta.toString() + System.lineSeparator();
-	
+
 		}
 		return todasAsApostas;
 	}
@@ -129,7 +186,6 @@ public class Cenario {
 			this.estado = "Finalizado (n ocorreu)";
 
 		}
-		
 
 	}
 
@@ -144,14 +200,13 @@ public class Cenario {
 	public double[] calculaResultado() {
 
 		double[] soma = new double[2];
-		
+
 		for (Aposta aposta : this.apostasFeitas) {
 			soma[0] += aposta.verificaAposta(this.estado)[0];
 			soma[1] += aposta.verificaAposta(this.estado)[1];
 			this.qtdGanhadores += aposta.verificaAposta(this.estado)[2];
 		}
 		return soma;
-		
 
 	}
 
@@ -159,18 +214,17 @@ public class Cenario {
 	 * Método que calcula o valor total que sera rateado entre os ganhadores.
 	 * 
 	 * @param taxa
-	 *             percentual do valor que será repassado para o caixa.
+	 *            percentual do valor que será repassado para o caixa.
 	 * 
 	 * @return Int - Valor total a ser rateado entre os ganhadores.
 	 */
 	public int totalRateioCenario(double taxa) {
-
-		if (this.getEstado().equals("Nao finalizado")) {
-			throw new UnsupportedOperationException(
-					"Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
-		}
-
-		return (int) (this.calculaResultado()[0]) - (int) (this.calculaResultado()[0] * taxa);
+		ValidaDados
+				.validaEstadoNaoFinalizado(this.getEstado(),
+						"Erro na consulta do total de rateio do cenario: Cenario ainda esta aberto");
+		
+		return (int) (this.calculaResultado()[0])
+				- (int) (this.calculaResultado()[0] * taxa);
 
 	}
 
@@ -183,19 +237,13 @@ public class Cenario {
 	 * @param valor
 	 *            valor que será assegurado.
 	 */
-	public int alteraApostaSeguroValor(int idAposta, int valor) {
-		
-		ValidaDados.validaAposta(idAposta, apostasFeitas.size(), "");
+	public void alteraApostaSeguroValor(int idAposta, int valor) {
+
+		ValidaDados.validaAposta(idAposta, apostasFeitas.size(), "Aposta não cadastrada");
 		ApostaSegura apostaAntiga = (ApostaSegura) buscaAposta(idAposta);
-		ValidaDados.validaApostaSegura(apostaAntiga, "");
-	
-		ApostaSegura apostaNova = new ApostaSegura(idAposta,
-				apostaAntiga.getApostador(), apostaAntiga.getValor(),
-				apostaAntiga.getPrevisao(), valor, apostaAntiga.getCusto());
-	
-		this.apostasFeitas.remove(apostaAntiga);
-		this.cadastraAposta(apostaNova);
-		return apostaNova.getCusto();
+		ValidaDados.validaApostaSegura(apostaAntiga, "Aposta não é uma Aposta Assegurada");
+
+		apostaAntiga.alteraSeguraValor(valor);
 	}
 
 	/**
@@ -207,18 +255,14 @@ public class Cenario {
 	 * @param taxa
 	 *            percentual do valor que será assegurado.
 	 */
-	public int alteraApostaSeguraTaxa(int idAposta, double taxa) {
-		
+	public void alteraApostaSeguraTaxa(int idAposta, double taxa) {
+
 		ValidaDados.validaAposta(idAposta, apostasFeitas.size(), "");
 		ApostaSegura apostaAntiga = (ApostaSegura) buscaAposta(idAposta);
 		ValidaDados.validaApostaSegura(apostaAntiga, "");
-		ApostaSegura apostaNova = new ApostaSegura(idAposta,
-				apostaAntiga.getApostador(), apostaAntiga.getValor(),
-				apostaAntiga.getPrevisao(), taxa, apostaAntiga.getCusto());
-	
-		this.apostasFeitas.remove(apostaAntiga);
-		this.cadastraAposta(apostaNova);
-		return apostaNova.getCusto();
+
+		apostaAntiga.alteraSeguraTaxa(taxa);
+
 	}
 
 	/**
@@ -231,18 +275,18 @@ public class Cenario {
 	 * @return Aposta - aposta pesquisada.
 	 */
 	private Aposta buscaAposta(int idAposta) {
-	
+
 		return apostasFeitas.get(idAposta - 1);
 	}
 
 	/**
-	 * { Método que retorna um Int representando a quantidade de apostas
+	 * Método que retorna um Int representando a quantidade de apostas
 	 * adiciona ao cenário.
 	 * 
 	 * @return Int - qtdApostas.
 	 */
 	public int getQtdApostas() {
-		return qtdApostas;
+		return this.apostasFeitas.size();
 	}
 
 	/**
@@ -284,18 +328,15 @@ public class Cenario {
 		return this.qtdGanhadores;
 	}
 
+	
 	/**
-	 * Método que retorna o tamanho da lista de apostas feitas.
+	 * Método que returna a String da descrição do cenário.
 	 * 
-	 * @return Int - apostasFeitas.size().
+	 * @return String - descricao
 	 */
-	public int getTamanho() {
-		return this.apostasFeitas.size();
-	}
-	public String getDescricao(){
+	public String getDescricao() {
 		return this.descricao;
 	}
-	
 
 	/**
 	 * Método que retorna a representação em String de um cenário. A
@@ -308,7 +349,8 @@ public class Cenario {
 	 */
 	@Override
 	public String toString() {
-		return this.cenario + " - " + this.descricao.trim() + " - " + this.estado;
+		return this.cenario + " - " + this.descricao.trim() + " - "
+				+ this.estado;
 	}
 
 	/**
@@ -345,5 +387,5 @@ public class Cenario {
 			return false;
 		return true;
 	}
-	
+
 }

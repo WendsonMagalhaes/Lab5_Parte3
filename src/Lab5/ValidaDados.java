@@ -90,7 +90,19 @@ public class ValidaDados {
 			throw new UnsupportedOperationException(mensagem);
 		}
 	}
-
+	/**
+	 * Método que verifica se o estado de um cénario é Nao finalizado.
+	 * 
+	 * @param string
+	 *            estado a ser válidado.
+	 * @param mensagem
+	 *            mensagem apresentada ao usuário.
+	 */
+	public static void validaEstadoNaoFinalizado(String string,String mensagem){
+		if (string.equals("Nao finalizado")) {
+			throw new UnsupportedOperationException(mensagem);
+		}
+	}
 	/**
 	 * Método que verifica se um cénario foi cadastrado.
 	 * 

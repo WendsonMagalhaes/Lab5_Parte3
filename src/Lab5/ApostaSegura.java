@@ -17,14 +17,6 @@ public class ApostaSegura extends Aposta {
 	 */
 	private int custo;
 	/**
-	 * Valor assegurado.
-	 */
-	private int valorSeguro;
-	/**
-	 * percentual do valor que será assegurado.
-	 */
-	private double taxa;
-	/**
 	 * Tipo da aposta assegurada (Valor ou Taxa).
 	 */
 	private Tipo tipo;
@@ -71,9 +63,14 @@ public class ApostaSegura extends Aposta {
 		.validaZeroOuNegativo(
 				idAposta,
 				"Numero de identificação invalido");
-
+		ValidaDados
+		.validaZeroOuNegativo(
+				custo,
+				"Erro no cadastro de aposta assegurada por valor: Custo nao pode ser menor ou igual a zero");
 		
-		this.tipo = new Valor(valorSeguro, custo);
+
+		this.custo = custo;
+		this.tipo = new Valor(valorSeguro);
 
 	}
 	/**
@@ -116,9 +113,14 @@ public class ApostaSegura extends Aposta {
 		.validaZeroOuNegativo(
 				idAposta,
 				"Numero de identificação invalido");
+		ValidaDados
+		.validaZeroOuNegativo(
+				custo,
+				"Erro no cadastro de aposta assegurada por custo: Custo nao pode ser menor ou igual a zero");
+		
 
-	
-		this.tipo = new Taxa(taxa, custo);
+		this.custo = custo;
+		this.tipo = new Taxa(taxa);
 
 	}
 	
@@ -161,11 +163,32 @@ public class ApostaSegura extends Aposta {
 		
 	}
 	/**
+	 * Método que altera o tipo da aposta passando de aposta segura taxa para
+	 * aposta segura valor.
+	 * 
+	 * @param valor
+	 *            valor que será assegurado.
+	 */
+	public void alteraSeguraValor(int valor){
+		this.tipo = new Valor(valor);
+	}
+	/**
+	 * Método que altera o tipo da aposta passando de aposta segura valor para
+	 * aposta segura taxa.
+	 * 
+	 * @param taxa
+	 *            percentual do valor que será assegurado.
+	 */
+	public void alteraSeguraTaxa(double taxa){
+		this.tipo = new Taxa(taxa);
+	}
+	
+	/**
 	 * Método que retorna o valor do custo da aposta.
 	 * @return Int - custo.
 	 */
 	public int getCusto() {
-		return this.tipo.getCusto();
+		return custo;
 	}
 	/**
 	 * Método que retorna uma String com a representação da aposta. A
@@ -178,13 +201,9 @@ public class ApostaSegura extends Aposta {
 	@Override
 	public String toString() {
 
-		double valor = this.valor / 100.00;
-		BigDecimal valorRS = new BigDecimal(valor).setScale(2,
-				RoundingMode.HALF_EVEN);
-		String valorString = String.valueOf(valorRS).replace(".", ",");
+		
 
-		return this.apostador + " - R$" + valorString + " - " + this.previsao + " - "
-				+ this.tipo.toString();
+		return super.toString() + this.tipo.toString();
 	}
 
 	/**

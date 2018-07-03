@@ -8,30 +8,26 @@ package Lab5;
  * @author Wendson Magalhães - 117210424
  */
 public class Taxa implements Tipo {
-
+	/**
+	 * Percentual do valor que será assegurado
+	 */
 	private double taxa;
-	private int custo;
+	
 
 	/**
 	 * Método que costrói o objeto Taxa, definindo seu custo e sua taxa.
 	 * 
 	 * @param taxa
 	 *            percentual do valor que será assegurado.
-	 * @param custo
-	 *            custo da aposta segurada.
 	 */
-	public Taxa(double taxa, int custo) {
-		ValidaDados
-		.validaZeroOuNegativo(
-				custo,
-				"Erro no cadastro de aposta assegurada por custo: Custo nao pode ser menor ou igual a zero");
+	public Taxa(double taxa) {
 		ValidaDados
 		.validaZeroOuNegativo(
 				taxa,
 				"Erro no cadastro de aposta assegurada por taxa: Taxa nao pode ser menor ou igual a zero");
 		
 		this.taxa = taxa;
-		this.custo = custo;
+		
 	}
 
 	/**
@@ -48,16 +44,6 @@ public class Taxa implements Tipo {
 		return  (int) (valor * this.taxa);
 	}
 	
-	/**
-	 * Método que retorna o custo da aposta assegurada
-	 * 
-	 * @return int - valor do custo.
-	 */
-	@Override
-	public int getCusto() {
-		
-		return this.custo;
-	}
 
 	/**
 	 * Método que retorna a representação em String da Taxa. A representação

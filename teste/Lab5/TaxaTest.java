@@ -22,7 +22,7 @@ public class TaxaTest {
 	@Before
 	public void preparaTaxa() {
 		
-		this.taxa = new Taxa(0.05,50);
+		this.taxa = new Taxa(0.05);
 	} 
 	/**
 	 * Teste que verifica o método calculaValor() para o tipo Taxa  com parâmetros iguais.
@@ -43,50 +43,24 @@ public class TaxaTest {
 	 */
 	@Test
 	public void testTaxa() {
-		new Taxa(0.05,50);
+		new Taxa(0.05);
 	}
 	/**
 	 * Teste que verifica se gera uma exceção ao tentar criar uma taxa com taxa zero.
 	 */
 	@Test(expected =NumberFormatException.class)
 	public void testTaxaTaxaZero() {
-		new Taxa(0,50);
+		new Taxa(0);
 	}
 	/**
 	 * Teste que verifica se gera uma exceção ao tentar criar uma taxa com taxa negativa.
 	 */
 	@Test(expected =NumberFormatException.class)
 	public void testTaxaTaxaNegativa() {
-		new Taxa(-0.05,50);
+		new Taxa(-0.05);
 	}
-	/**
-	 * Teste que verifica se gera uma exceção ao tentar criar uma taxa com custo zero.
-	 */
-	@Test(expected =NumberFormatException.class)
-	public void testTaxaCustoZero() {
-		new Taxa(0.05,0);
-	}
-	/**
-	 * Teste que verifica se gera uma exceção ao tentar criar uma taxa com custo negativo.
-	 */
-	@Test(expected =NumberFormatException.class)
-	public void testTaxaCustoNegativo() {
-		new Taxa(0.05,-50);
-	}
-	/**
-	 * Teste que verifica o método getCusto() com parâmetros iguais.
-	 */
-	@Test
-	public void testGetCusto(){
-		assertEquals(50,taxa.getCusto());
-	}
-	/**
-	 * Teste que verifica o método getCusto() com parâmetros diferentes.
-	 */
-	@Test
-	public void testGetTaxaDiferentes(){
-		assertNotEquals(10,taxa.getCusto());
-	}
+	
+	
 	/**
 	 * Teste que verifica o método toString da taxa.
 	 */

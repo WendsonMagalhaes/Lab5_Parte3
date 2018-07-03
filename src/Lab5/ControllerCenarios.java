@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * @author Wendson Magalhães - 117210424
  */
 
-public class ControllerCenarios{
+public class ControllerCenarios {
 
 	/**
 	 * Lista com todos os cenários.
@@ -29,18 +29,11 @@ public class ControllerCenarios{
 	 * Taxa que será retirado do montante dos perdedores.
 	 */
 	private double taxa;
-	/**
-	 * iniciador da numeração de um cenario
-	 */
-	private int idCenario = 1;
-	/**
-	 * iniciador da numeração de uma aposta
-	 */
-	private int idAposta = 0;
+
 	/**
 	 * Ordem de exibição do sistema de apostas
 	 */
-	private String ordem;
+	private Comparator tipoDeComparacao;
 
 	/**
 	 * Método que contrói o objeto CONTROLLERCENARIOS, definindo o valor inicial
@@ -61,7 +54,7 @@ public class ControllerCenarios{
 		this.listaCenarios = new ArrayList<>();
 		this.caixa = caixa;
 		this.taxa = taxa;
-		this.ordem = "Cadastro";
+		this.tipoDeComparacao = new ComparaCenario();
 	}
 
 	/**
@@ -95,10 +88,9 @@ public class ControllerCenarios{
 	 */
 	public int cadastraCenario(String descricao) {
 
-		Cenario cenario = new Cenario(this.idCenario, descricao);
+		Cenario cenario = new Cenario(this.listaCenarios.size() + 1, descricao);
 		listaCenarios.add(cenario);
-		idCenario++;
-		return idCenario - 1;
+		return listaCenarios.size();
 
 	}
 
@@ -117,11 +109,12 @@ public class ControllerCenarios{
 
 		ValidaDados.validaCaixa(caixa, bonus,
 				"Erro no caixa valor vai ficar negativo");
-		Cenario cenario = new CenarioBonus(this.idCenario, descricao, bonus);
+		Cenario cenario = new CenarioBonus(this.listaCenarios.size() + 1,
+				descricao, bonus);
 		listaCenarios.add(cenario);
-		idCenario++;
+
 		this.caixa -= bonus;
-		return idCenario - 1;
+		return this.listaCenarios.size();
 
 	}
 
@@ -156,12 +149,13 @@ public class ControllerCenarios{
 		ValidaDados.validaPrevisao(previsao,
 				"Erro no cadastro de aposta: Previsao invalida");
 
-		idAposta = buscaCenario(cenario).getTamanho() + 1;
-		ValidaDados.validaZeroOuNegativo(idAposta,
+		ValidaDados.validaZeroOuNegativo(
+				buscaCenario(cenario).getQtdApostas() + 1,
 				"Erro no cadastro de aposta: Numero de identificação invalido");
 
-		Aposta aposta = new Aposta(idAposta, apostador, valor, previsao);
-		buscaCenario(cenario).cadastraAposta(aposta);
+		buscaCenario(cenario).cadastraAposta(
+				buscaCenario(cenario).getQtdApostas() + 1, apostador, valor,
+				previsao);
 
 	}
 
@@ -208,18 +202,16 @@ public class ControllerCenarios{
 				.validaPrevisao(previsao,
 						"Erro no cadastro de aposta assegurada por valor: Previsao invalida");
 
-
-		idAposta = buscaCenario(cenario).getTamanho() + 1;
 		ValidaDados
 				.validaZeroOuNegativo(
-						idAposta,
+						buscaCenario(cenario).getQtdApostas() + 1,
 						"Erro no cadastro de aposta assegurada por valor: Numero de identificação invalido");
-		
-		Aposta aposta = new ApostaSegura(idAposta, apostador, valor, previsao,
-				valorSeguro, custo);
-		buscaCenario(cenario).cadastraAposta(aposta);
+
+		buscaCenario(cenario).cadastraAposta(
+				buscaCenario(cenario).getQtdApostas() + 1, apostador, valor,
+				previsao, valorSeguro, custo);
 		this.caixa += custo;
-		return idAposta;
+		return buscaCenario(cenario).getQtdApostas();
 	}
 
 	/**
@@ -264,20 +256,17 @@ public class ControllerCenarios{
 		ValidaDados
 				.validaPrevisao(previsao,
 						"Erro no cadastro de aposta assegurada por taxa: Previsao invalida");
-		
 
-		idAposta = buscaCenario(cenario).getTamanho() + 1;
 		ValidaDados
-		.validaZeroOuNegativo(
-				idAposta,
-				"Erro no cadastro de aposta assegurada por taxa: Numero de identificação invalido");
-		
-		Aposta aposta = new ApostaSegura(idAposta, apostador, valor, previsao,
-				taxa, custo);
+				.validaZeroOuNegativo(
+						buscaCenario(cenario).getQtdApostas() + 1,
+						"Erro no cadastro de aposta assegurada por taxa: Numero de identificação invalido");
 
-		buscaCenario(cenario).cadastraAposta(aposta);
+		buscaCenario(cenario).cadastraAposta(
+				buscaCenario(cenario).getQtdApostas() + 1, apostador, valor,
+				previsao, taxa, custo);
 		this.caixa += custo;
-		return idAposta;
+		return buscaCenario(cenario).getQtdApostas();
 	}
 
 	/**
@@ -337,7 +326,7 @@ public class ControllerCenarios{
 	 *         cenário.
 	 */
 	public String exibeApostas(int cenario) {
-		
+
 		ValidaDados.validaZeroOuNegativo(cenario,
 				"Erro na consulta de cenario: Cenario invalido");
 		ValidaDados.validaCenario(cenario, listaCenarios.size(),
@@ -362,7 +351,7 @@ public class ControllerCenarios{
 				"Erro na consulta de cenario: Cenario invalido");
 		ValidaDados.validaCenario(cenario, listaCenarios.size(),
 				"Erro na consulta de cenario: Cenario nao cadastrado");
-		
+
 		return buscaCenario(cenario).toString();
 	}
 
@@ -380,7 +369,7 @@ public class ControllerCenarios{
 	 */
 	public String exibeCenarios() {
 		String toString = "";
-		
+
 		for (Cenario cenario : listaCenarios) {
 			toString += cenario.toString() + System.lineSeparator();
 
@@ -511,44 +500,53 @@ public class ControllerCenarios{
 		c.alteraApostaSeguraTaxa(apostaAssegurada, taxa);
 		return apostaAssegurada;
 	}
+
 	/**
 	 * Método que altera a ordem de exibição de um cenário.
-	 * @param ordem nova ordem.
+	 * 
+	 * @param ordem
+	 *            nova ordem.
 	 */
-	public void alterarOrdem(String ordem){
-		ValidaDados.validaNull(ordem, "Erro ao alterar ordem: Ordem nao pode ser vazia ou nula");
+	public void alterarOrdem(String ordem) {
+		ValidaDados.validaNull(ordem,
+				"Erro ao alterar ordem: Ordem nao pode ser vazia ou nula");
 		ValidaDados.validaOrdem(ordem, "Erro ao alterar ordem: Ordem invalida");
-		this.ordem = ordem.trim();
+		switch (ordem.trim()){
+		case "cadastro":
+			this.tipoDeComparacao = new ComparaCenario();
+			break;
+		case "nome":
+			this.tipoDeComparacao = new ComparaDescricao();
+			break;
+		case "apostas":
+			this.tipoDeComparacao = new ComparaQuantidadeDeApostas();
+			break;
+		}
+		
 	}
+
 	/**
 	 * Método que exibe um cenário de acordo com a ordem de exibição.
-	 * @param cenario posição em que se encontra o cenário a ser exibido.
+	 * 
+	 * @param cenario
+	 *            posição em que se encontra o cenário a ser exibido.
 	 * @return a representação em String do cenário.
 	 * 
 	 */
-	public String exibirCenarioOrdenado(int cenario){
-		ValidaDados.validaZeroOuNegativo(cenario,"Erro na consulta de cenario ordenado: Cenario invalido");
-		ValidaDados.validaCenario(cenario, this.listaCenarios.size(), "Erro na consulta de cenario ordenado: Cenario nao cadastrado");
+	public String exibirCenarioOrdenado(int cenario) {
+		ValidaDados.validaZeroOuNegativo(cenario,
+				"Erro na consulta de cenario ordenado: Cenario invalido");
+		ValidaDados.validaCenario(cenario, this.listaCenarios.size(),
+				"Erro na consulta de cenario ordenado: Cenario nao cadastrado");
 
 		String cenarioOrdenado = "";
 	
-		switch(this.ordem){
-		case "cadastro":
-			return this.exbibeCenario(cenario);
-		case "nome":
-			Collections.sort(listaCenarios, new ComparaDescricao());
+			Collections.sort(listaCenarios, this.tipoDeComparacao);
 			cenarioOrdenado = this.exbibeCenario(cenario);
-			Collections.sort(this.listaCenarios, new ComparaCenario());
+			Collections.sort(listaCenarios, new ComparaCenario());
+			
 			return cenarioOrdenado;
-				
-		case "apostas":
-			Collections.sort(listaCenarios, new ComparaQuantidadeDeApostas());
-			cenarioOrdenado = this.exbibeCenario(cenario);
-			Collections.sort(this.listaCenarios, new ComparaCenario());
-			return cenarioOrdenado;
-		}
-		return "0";
-		
+
 	}
 
 }

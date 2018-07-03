@@ -13,11 +13,5 @@ public interface Tipo {
 	 */
 	
 	public double calculaValor(double valor);
-	/**
-	 * Método que retorna o custo da aposta assegurada
-	 * 
-	 * @return int - valor do custo.
-	 */
-	public int getCusto();
-
+	
 }
